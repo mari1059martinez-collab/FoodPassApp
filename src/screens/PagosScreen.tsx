@@ -9,12 +9,21 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+<<<<<<< HEAD
+=======
+  Modal,
+  Alert,
+>>>>>>> 18abcdc6fd3da31a4305ea9ef59c40c68909243c
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../components/shared/Header';
 import { Colors, BorderRadius } from '../theme/colors';
 
+<<<<<<< HEAD
+=======
+// Datos iniciales de métodos de pago
+>>>>>>> 18abcdc6fd3da31a4305ea9ef59c40c68909243c
 const paymentMethods = [
   { id: '1', type: 'visa', last4: '4242', expiry: '12/26', isDefault: true, label: 'Visa' },
   { id: '2', type: 'mastercard', last4: '8821', expiry: '08/25', isDefault: false, label: 'Mastercard' },
@@ -27,8 +36,34 @@ const cardIconMap: Record<string, keyof typeof MaterialIcons.glyphMap> = {
   nequi: 'phone-android',
 };
 
+<<<<<<< HEAD
 export default function PagosScreen() {
   const [selectedMethod, setSelectedMethod] = useState('1');
+=======
+// Opciones para agregar nuevo método (puedes ampliar)
+const newPaymentOptions = [
+  { id: 'add-card', label: 'Tarjeta de crédito o débito', icon: 'credit-card' },
+  { id: 'add-nequi', label: 'Nequi', icon: 'phone-android' },
+  { id: 'add-daviplata', label: 'Daviplata', icon: 'account-balance-wallet' },
+  { id: 'add-efecty', label: 'Efecty', icon: 'attach-money' },
+];
+
+export default function PagosScreen() {
+  const [selectedMethod, setSelectedMethod] = useState('1');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  // Función para simular agregar un método
+  const handleAddPaymentMethod = (optionId: string) => {
+    setModalVisible(false);
+    // Aquí podrías navegar a otra pantalla o mostrar un formulario
+    Alert.alert(
+      'Agregar método',
+      `Has seleccionado: ${newPaymentOptions.find(o => o.id === optionId)?.label}`
+    );
+    // Luego podrías agregar un nuevo elemento al array paymentMethods (si usas estado)
+    // Pero como paymentMethods es constante, tendrías que convertirlo en estado
+  };
+>>>>>>> 18abcdc6fd3da31a4305ea9ef59c40c68909243c
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -112,8 +147,17 @@ export default function PagosScreen() {
           </TouchableOpacity>
         ))}
 
+<<<<<<< HEAD
         {/* Botón agregar tarjeta */}
         <TouchableOpacity style={styles.addCardButton} activeOpacity={0.8}>
+=======
+        {/* Botón agregar tarjeta - AHORA ABRE MODAL */}
+        <TouchableOpacity
+          style={styles.addCardButton}
+          activeOpacity={0.8}
+          onPress={() => setModalVisible(true)}
+        >
+>>>>>>> 18abcdc6fd3da31a4305ea9ef59c40c68909243c
           <View style={styles.addCardIcon}>
             <MaterialIcons name="add" size={22} color={Colors.primary} />
           </View>
@@ -143,6 +187,45 @@ export default function PagosScreen() {
           </View>
         ))}
       </ScrollView>
+<<<<<<< HEAD
+=======
+
+      {/* ===== MODAL PARA AGREGAR MÉTODO DE PAGO ===== */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Agregar método de pago</Text>
+
+            {newPaymentOptions.map((option) => (
+              <TouchableOpacity
+                key={option.id}
+                style={styles.modalOption}
+                onPress={() => handleAddPaymentMethod(option.id)}
+                activeOpacity={0.7}
+              >
+                <View style={styles.modalOptionIcon}>
+                  <MaterialIcons name={option.icon as any} size={24} color={Colors.primary} />
+                </View>
+                <Text style={styles.modalOptionText}>{option.label}</Text>
+                <MaterialIcons name="chevron-right" size={20} color={Colors.onSurfaceVariant} />
+              </TouchableOpacity>
+            ))}
+
+            <TouchableOpacity
+              style={styles.modalCloseButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalCloseButtonText}>Cancelar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+>>>>>>> 18abcdc6fd3da31a4305ea9ef59c40c68909243c
     </SafeAreaView>
   );
 }
@@ -371,4 +454,62 @@ const styles = StyleSheet.create({
     color: Colors.onTertiaryContainer,
     letterSpacing: 1,
   },
+<<<<<<< HEAD
 });
+=======
+  // ===== ESTILOS DEL MODAL =====
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'flex-end', // Aparece desde abajo (como action sheet)
+  },
+  modalContent: {
+    backgroundColor: Colors.surface,
+    borderTopLeftRadius: BorderRadius.xxl,
+    borderTopRightRadius: BorderRadius.xxl,
+    padding: 24,
+    paddingBottom: 40,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: Colors.onSurface,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  modalOption: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.surfaceContainerLow,
+  },
+  modalOptionIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: Colors.surfaceContainerLow,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  modalOptionText: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: '500',
+    color: Colors.onSurface,
+  },
+  modalCloseButton: {
+    marginTop: 20,
+    paddingVertical: 14,
+    borderRadius: BorderRadius.lg,
+    backgroundColor: Colors.surfaceContainerLow,
+    alignItems: 'center',
+  },
+  modalCloseButtonText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: Colors.onSurfaceVariant,
+  },
+});
+>>>>>>> 18abcdc6fd3da31a4305ea9ef59c40c68909243c
