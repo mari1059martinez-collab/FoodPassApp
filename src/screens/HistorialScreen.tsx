@@ -244,28 +244,36 @@ export default function HistorialScreen() {
         <View style={styles.statsContainer}>
           {/* Tarjeta grande (Blanca) */}
           <View style={styles.heroStatCard}>
-            <Text style={styles.heroStatTitle}>Tu Trayectoria Gastronómica</Text>
-            <Text style={styles.heroStatSubtitle}>
+            <Text style={styles.heroStatTitle} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.9}>
+              Tu Trayectoria Gastronómica
+            </Text>
+            <Text style={styles.heroStatSubtitle} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.8}>
               {stats.subtitleText}
             </Text>
             <View style={styles.heroStats}>
               <View style={styles.heroStatCol}>
-                <Text style={styles.heroStatLabel} numberOfLines={2}>TOTAL PEDIDOS</Text>
+                <Text style={styles.heroStatLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.8}>
+                  TOTAL PEDIDOS
+                </Text>
                 <Text 
                   style={[styles.heroStatNumber, { color: Colors.primary }]} 
                   numberOfLines={1} 
                   adjustsFontSizeToFit
+                  minimumFontScale={0.5}
                 >
                   {stats.totalPedidos}
                 </Text>
               </View>
               <View style={styles.heroStatDivider} />
               <View style={styles.heroStatCol}>
-                <Text style={styles.heroStatLabel} numberOfLines={2}>AHORRO FOODPASS</Text>
+                <Text style={styles.heroStatLabel} numberOfLines={2} adjustsFontSizeToFit minimumFontScale={0.8}>
+                  AHORRO FOODPASS
+                </Text>
                 <Text 
                   style={[styles.heroStatNumber, { color: Colors.tertiary }]} 
                   numberOfLines={1} 
                   adjustsFontSizeToFit
+                  minimumFontScale={0.5}
                 >
                   ${formatCurrency(stats.totalAhorro)}
                 </Text>
@@ -278,12 +286,26 @@ export default function HistorialScreen() {
             <View style={styles.eliteIcon}>
               <MaterialIcons name="workspace-premium" size={32} color={Colors.onPrimaryContainer} />
             </View>
-            <Text style={styles.eliteTitle}>Miembro Elite</Text>
-            <Text style={styles.eliteSubtitle}>
+            <Text style={styles.eliteTitle} numberOfLines={1} adjustsFontSizeToFit minimumFontScale={0.9}>
+              Miembro Elite
+            </Text>
+            <Text 
+              style={styles.eliteSubtitle} 
+              numberOfLines={3} 
+              adjustsFontSizeToFit 
+              minimumFontScale={0.7}
+            >
               Estás a {stats.ordersLeft} {stats.ordersLeft === 1 ? 'pedido' : 'pedidos'} de tu próxima recompensa.
             </Text>
             <TouchableOpacity style={styles.eliteButton} activeOpacity={0.8}>
-              <Text style={styles.eliteButtonText}>Ver Beneficios</Text>
+              <Text 
+                style={styles.eliteButtonText} 
+                numberOfLines={1} 
+                adjustsFontSizeToFit 
+                minimumFontScale={0.7}
+              >
+                Ver Beneficios
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -360,6 +382,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.04,
     shadowRadius: 12,
     elevation: 3,
+    overflow: 'hidden',
   },
   heroStatTitle: {
     fontSize: 15,
@@ -367,22 +390,27 @@ const styles = StyleSheet.create({
     color: Colors.onSurface,
     marginBottom: 4,
     lineHeight: 18,
+    flexShrink: 1,
   },
   heroStatSubtitle: {
     fontSize: 11,
     color: Colors.onSurfaceVariant,
     lineHeight: 14,
     marginBottom: 12,
+    flexShrink: 1,
   },
   heroStats: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     width: '100%',
+    flexShrink: 1,
   },
   heroStatCol: {
     flex: 1,
     alignItems: 'flex-start',
+    flexShrink: 1,
+    overflow: 'hidden',
   },
   heroStatLabel: {
     fontSize: 8,
@@ -391,11 +419,13 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5, // Reducido para encajar mejor
     marginBottom: 2,
     lineHeight: 10,
+    flexShrink: 1,
   },
   heroStatNumber: {
     fontSize: 26, // Ligeramente reducido de 28
     fontWeight: '800',
     letterSpacing: -0.5,
+    flexShrink: 1,
   },
   heroStatDivider: {
     width: 1,
@@ -411,6 +441,7 @@ const styles = StyleSheet.create({
     padding: 12, // Menos padding para evitar desbordes de texto
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
   eliteIcon: {
     width: 48, // Ajustado de 56
@@ -427,6 +458,7 @@ const styles = StyleSheet.create({
     color: '#fff',
     marginBottom: 4,
     textAlign: 'center',
+    flexShrink: 1,
   },
   eliteSubtitle: {
     fontSize: 10,
@@ -434,6 +466,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 13,
     marginBottom: 8,
+    flexShrink: 1,
   },
   eliteButton: {
     width: '100%',
@@ -443,11 +476,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.15)',
+    flexShrink: 1,
+    overflow: 'hidden',
   },
   eliteButtonText: {
     fontSize: 11,
     fontWeight: '700',
     color: '#fff',
+    flexShrink: 1,
   },
   // FILTROS
   filtersScroll: {
