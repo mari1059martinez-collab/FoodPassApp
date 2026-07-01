@@ -2,18 +2,18 @@
 //
 // Pantalla de perfil del usuario.
 
-import React from 'react';
+import React, { useState } from 'react'; // 1. Agregamos useState
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
-  Switch,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Colors, BorderRadius } from '../theme/colors';
+import SwitchField from '../components/shared/selection/SwitchField'; // 2. Importamos el componente SwitchField
 
 // Tipo para los items del menú de configuración
 type SettingItem = {
@@ -55,6 +55,9 @@ const settingsSections: { title: string; items: SettingItem[] }[] = [
 ];
 
 export default function PerfilScreen() {
+  // 3. Estado real para controlar el switch de notificaciones
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       {/* Header personalizado para perfil */}
@@ -114,48 +117,66 @@ export default function PerfilScreen() {
             <Text style={styles.settingsSectionTitle}>{section.title.toUpperCase()}</Text>
 
             <View style={styles.settingsGroup}>
-              {section.items.map((item, index) => (
-                <TouchableOpacity
-                  key={item.label}
-                  style={[
-                    styles.settingItem,
-                    // Sin borde en el último elemento
-                    index === section.items.length - 1 && styles.settingItemLast,
-                  ]}
-                  activeOpacity={item.type !== 'toggle' ? 0.7 : 1}
-                >
-                  {/* Ícono */}
-                  <View style={styles.settingIcon}>
-                    <MaterialIcons name={item.icon} size={20} color={Colors.primary} />
-                  </View>
+              {section.items.map((item, index) => {
+                // 4. Lógica especial para el Toggle usando SwitchField
+                if (item.type === 'toggle') {
+                    return (
+                        <View 
+                            key={item.label} 
+                            style={[
+                                styles.settingItem, 
+                                index === section.items.length - 1 && styles.settingItemLast
+                            ]}
+                        >
+                            <View style={styles.settingIcon}>
+                                <MaterialIcons name={item.icon} size={20} color={Colors.primary} />
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <SwitchField 
+                                    label={item.label}
+                                    value={notificationsEnabled}
+                                    onToggle={(val) => setNotificationsEnabled(val)}
+                                />
+                            </View>
+                        </View>
+                    );
+                }
 
-                  {/* Texto */}
-                  <View style={styles.settingText}>
-                    <Text style={styles.settingLabel}>{item.label}</Text>
-                    {item.description && (
-                      <Text style={styles.settingDescription}>{item.description}</Text>
-                    )}
-                  </View>
-
-                  {/* Control del lado derecho */}
-                  {item.type === 'arrow' && (
-                    <MaterialIcons name="arrow-forward-ios" size={14} color={Colors.onSurfaceVariant} />
-                  )}
-                  {item.type === 'toggle' && (
-                    // Switch es el componente de toggle nativo
-                    <Switch
-                      value={item.value}
-                      trackColor={{ false: Colors.surfaceContainerHigh, true: Colors.tertiaryContainer }}
-                      thumbColor={item.value ? Colors.tertiary : Colors.outlineVariant}
-                    />
-                  )}
-                  {item.type === 'badge' && item.badge && (
-                    <View style={[styles.settingBadge, { backgroundColor: item.badgeColor }]}>
-                      <Text style={styles.settingBadgeText}>{item.badge}</Text>
-                    </View>
-                  )}
-                </TouchableOpacity>
-              ))}
+                // 5. El resto de los botones (Arrow y Badge) se mantienen igual
+                return (
+                    <TouchableOpacity
+                      key={item.label}
+                      style={[
+                        styles.settingItem,
+                        index === section.items.length - 1 && styles.settingItemLast,
+                      ]}
+                      activeOpacity={0.7}
+                    >
+                      {/* Ícono */}
+                      <View style={styles.settingIcon}>
+                        <MaterialIcons name={item.icon} size={20} color={Colors.primary} />
+                      </View>
+    
+                      {/* Texto */}
+                      <View style={styles.settingText}>
+                        <Text style={styles.settingLabel}>{item.label}</Text>
+                        {item.description && (
+                          <Text style={styles.settingDescription}>{item.description}</Text>
+                        )}
+                      </View>
+    
+                      {/* Control del lado derecho */}
+                      {item.type === 'arrow' && (
+                        <MaterialIcons name="arrow-forward-ios" size={14} color={Colors.onSurfaceVariant} />
+                      )}
+                      {item.type === 'badge' && item.badge && (
+                        <View style={[styles.settingBadge, { backgroundColor: item.badgeColor }]}>
+                          <Text style={styles.settingBadgeText}>{item.badge}</Text>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  );
+              })}
             </View>
           </View>
         ))}
@@ -314,7 +335,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    // Separador sutil en el fondo (no en el último)
     borderBottomWidth: 1,
     borderBottomColor: Colors.surfaceContainerLow,
   },
