@@ -8,7 +8,7 @@ import {
   StyleSheet 
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors, BorderRadius } from '../../../theme/colors';
+import { Colors, BorderRadius } from '../../theme/colors';
 
 // Props que acepta el componente
 interface TextInputProps {

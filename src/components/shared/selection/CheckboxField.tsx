@@ -3,7 +3,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors, BorderRadius } from '../../../theme/colors';
+import { Colors, BorderRadius } from '../../theme/colors';
 
 interface CheckboxFieldProps {
   label: string;

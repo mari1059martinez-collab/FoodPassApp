@@ -16,7 +16,7 @@ import {
   FlatList,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors, BorderRadius } from '../../../theme/colors';
+import { Colors, BorderRadius } from '../../theme/colors';
 
 // Tipo para cada opción del selector
 interface SelectOption {

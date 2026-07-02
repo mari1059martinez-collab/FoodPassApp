@@ -11,9 +11,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors, BorderRadius } from '../../../theme/colors';
+import { Colors, BorderRadius } from '../../theme/colors';
 
-interface PasswordFieldProps {
+interface AppPasswordInputProps {
   label: string;              // ej: "PASSWORD"
   placeholder?: string;       // ej: "••••••••"
   value: string;              // valor actual

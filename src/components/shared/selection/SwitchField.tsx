@@ -2,7 +2,15 @@
 
 import React from 'react';
 import { View, Text, Switch, StyleSheet } from 'react-native';
+<<<<<<< HEAD
+import { Colors } from '../../theme/colors';
+=======
+<<<<<<< HEAD
 import { Colors } from '../../../theme/colors';
+=======
+import { Colors } from '../../theme/colors';
+>>>>>>> origin/master
+>>>>>>> e8da3abcd0480b37f872a7006ab961f2b4bce4f7
 
 interface SwitchFieldProps {
   label: string;

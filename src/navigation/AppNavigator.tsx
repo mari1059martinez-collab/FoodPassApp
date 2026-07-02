@@ -20,6 +20,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
+<<<<<<< HEAD
+import { useAuth } from '../context/AuthContext';
+=======
+>>>>>>> e8da3abcd0480b37f872a7006ab961f2b4bce4f7
 
 // Importamos todas las pantallas
 import LoginScreen from '../screens/LoginScreen';
@@ -104,9 +108,13 @@ function MainTabs() {
 // Componente raíz del navegador.
 // Maneja el flujo de autenticación: Login → App Principal
 export default function AppNavigator() {
+<<<<<<< HEAD
+  const { isLoggedIn, login } = useAuth();
+=======
   // isLoggedIn controla si mostramos el Login o la App principal.
   // En una app real esto vendría de un contexto de autenticación o AsyncStorage.
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+>>>>>>> e8da3abcd0480b37f872a7006ab961f2b4bce4f7
 
   return (
     // NavigationContainer SIEMPRE envuelve todo el sistema de navegación.
@@ -119,7 +127,11 @@ export default function AppNavigator() {
         ) : (
           // Si no, mostramos el login y le pasamos la función para autenticarse
           <Stack.Screen name="Login">
+<<<<<<< HEAD
+            {() => <LoginScreen onLogin={login} />}
+=======
             {() => <LoginScreen onLogin={() => setIsLoggedIn(true)} />}
+>>>>>>> e8da3abcd0480b37f872a7006ab961f2b4bce4f7
           </Stack.Screen>
         )}
       </Stack.Navigator>

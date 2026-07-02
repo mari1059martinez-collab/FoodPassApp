@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { Colors, BorderRadius } from '../../../theme/colors';
+import { Colors, BorderRadius } from '../../theme/colors';
 
 interface AvatarImageProps {
   size?: number;          // tamaño en px, por defecto 48
